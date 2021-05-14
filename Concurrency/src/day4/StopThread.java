@@ -3,7 +3,7 @@ package day4;
 import java.util.concurrent.TimeUnit;
 
 public class StopThread {
-	static boolean stopRequested;
+	volatile static boolean stopRequested;
 	
 	public static void main(String[] args) throws InterruptedException {
 		Thread backgroundThread = new Thread(new BackgroundThread());
@@ -11,11 +11,6 @@ public class StopThread {
 
 		TimeUnit.SECONDS.sleep(1);
 		stopRequested = true;
-	}
-	
-	private static int nextSerialNumber = 0;
-	public synchronized static int generateSerialNumber() {
-		return nextSerialNumber++;
 	}
 }
 
