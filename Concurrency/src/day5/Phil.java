@@ -18,8 +18,13 @@ public class Phil extends Thread {
 			try {
 				// non critical section
 				Thread.sleep(ThreadLocalRandom.current().nextLong(100, 200));			
+				
+				// Choice 1  
+				// Thread.sleep(100);
 				synchronized (right) {
 					System.out.println(id + " got right fork");
+					// Choice 2  
+					// Thread.sleep(100);
 					synchronized (left) {
 						System.out.println(id + " got left fork");
 						// critical section starts
@@ -27,6 +32,8 @@ public class Phil extends Thread {
 						// critical section ends
 					}
 					System.out.println(id + " put right fork");
+					// Choice 3  
+					// Thread.sleep(100);
 				}
 				System.out.println(id + " put left fork");
 			} catch (InterruptedException ex) {

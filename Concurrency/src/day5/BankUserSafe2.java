@@ -11,6 +11,14 @@ public class BankUserSafe2 implements Runnable {
 	public void run() {
 		for (int i = 0; i < 100; i++) {
 			synchronized (a1) {	
+				
+				try {
+					Thread.sleep(1);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
 				synchronized (a2) {
 					if (a1.get() >= 10) {
 						a1.withdraw(10);
