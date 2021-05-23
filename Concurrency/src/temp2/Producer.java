@@ -2,21 +2,21 @@ package temp2;
 
 import java.util.Random;
 
-public class MakerThread extends Thread {
+public class Producer extends Thread {
     private final Random random;
-    private final Table table;
+    private final BoundedBuffer buffer;
     private static int id = 0; 
-    public MakerThread(String name, Table table, long seed) {
+    public Producer(String name, BoundedBuffer buffer, long seed) {
         super(name);
-        this.table = table;
+        this.buffer = buffer;
         this.random = new Random(seed);
     }
     public void run() {
         try {
             while (true) {
-                Thread.sleep(random.nextInt(1000));
-                String cake = "[ Cake No." + nextId() + " by " + getName() + " ]";
-                table.put(cake);
+                Thread.sleep(random.nextInt(600));
+                String datum = "[ Item No." + nextId() + " by " + getName() + " ]";
+                buffer.put(datum);
             }
         } catch (InterruptedException e) {
         }

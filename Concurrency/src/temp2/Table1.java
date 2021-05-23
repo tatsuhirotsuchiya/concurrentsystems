@@ -1,11 +1,11 @@
 package temp2;
 
-public class Table {
+public class Table1 {
     private final String[] buffer;
     private int tail;
     private int head;
     private int count;
-    public Table(int count) {
+    public Table1(int count) {
         this.buffer = new String[count];
         this.head = 0;
         this.tail = 0;

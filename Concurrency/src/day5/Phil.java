@@ -20,11 +20,11 @@ public class Phil extends Thread {
 				Thread.sleep(ThreadLocalRandom.current().nextLong(100, 200));			
 				
 				// Choice 1  
-				// Thread.sleep(100);
+				
 				synchronized (right) {
 					System.out.println(id + " got right fork");
 					// Choice 2  
-					// Thread.sleep(100);
+					Thread.sleep(100);
 					synchronized (left) {
 						System.out.println(id + " got left fork");
 						// critical section starts
@@ -48,7 +48,7 @@ public class Phil extends Thread {
 			fork[i] = new Resource("Resource " + i);
 		}
 		for (int i = 0; i < numOfPhils; i++) {
-			new Phil(fork[(i + numOfPhils - 1) % numOfPhils], fork[i], i).start();
+			new Phil2(fork[(i + numOfPhils - 1) % numOfPhils], fork[i], i).start();
 		}
 	}
 }

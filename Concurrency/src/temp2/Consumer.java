@@ -2,18 +2,18 @@ package temp2;
 
 import java.util.Random;
 
-public class EaterThread extends Thread {
+public class Consumer extends Thread {
     private final Random random;
-    private final Table table;
-    public EaterThread(String name, Table table, long seed) {
+    private final BoundedBuffer buffer;
+    public Consumer(String name, BoundedBuffer buffer, long seed) {
         super(name);
-        this.table = table;
+        this.buffer = buffer;
         this.random = new Random(seed);
     }
     public void run() {
         try {
             while (true) {
-                String cake = table.take();
+                String datum = buffer.take();
                 Thread.sleep(random.nextInt(1000));
             }
         } catch (InterruptedException e) {
