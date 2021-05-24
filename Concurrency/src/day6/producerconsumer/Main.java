@@ -1,10 +1,10 @@
-package temp2;
+package day6.producerconsumer;
 
 public class Main {
     public static void main(String[] args) {
         BoundedBuffer buff = new BoundedBuffer(5); 
         new Producer("Producer-1", buff, 31415).start();
-//        new Producer("Producer-2", buff, 92653).start();
+        new Producer("Producer-2", buff, 92653).start();
 //        new Producer("Producer-3", buff, 58979).start();
         new Consumer("Consumer-1", buff, 32384).start();
 //        new Consumer("Consumer-2", buff, 62643).start();

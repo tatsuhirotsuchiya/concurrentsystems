@@ -1,4 +1,4 @@
-package temp2;
+package day6.producerconsumer;
 
 import java.util.concurrent.*;
 
@@ -11,8 +11,8 @@ public class BoundedBuffer {
         this.buffer = new String[count];
         this.head = 0;
         this.tail = 0;
-        this.slots = new Semaphore(buffer.length);
-        this.items = new Semaphore(0);
+        this.slots = new Semaphore(buffer.length, true);
+        this.items = new Semaphore(0, true);
     }
 
     public void put(String datum) throws InterruptedException {

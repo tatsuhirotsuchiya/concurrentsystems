@@ -1,4 +1,4 @@
-package temp2;
+package day6.producerconsumer;
 
 public class BoundedBufferBusy {
     private final String[] buffer;
