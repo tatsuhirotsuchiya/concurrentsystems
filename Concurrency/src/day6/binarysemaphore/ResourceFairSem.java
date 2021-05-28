@@ -6,7 +6,7 @@ import java.util.concurrent.TimeUnit;
 
 public class ResourceFairSem implements ResourceType {
 
-	final Semaphore sem = new Semaphore(1, true);
+	final Semaphore sem = new Semaphore(1, false);
 	
 	public void access() {
 		try {

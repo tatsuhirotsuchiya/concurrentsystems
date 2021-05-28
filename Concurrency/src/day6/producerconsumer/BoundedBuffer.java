@@ -17,9 +17,17 @@ public class BoundedBuffer {
 
     public void put(String datum) throws InterruptedException {
         slots.acquire();
+        // Thread.sleep(100); //choice 1
+        
         System.out.println(Thread.currentThread().getName() + " puts " + datum);
         buffer[tail] = datum;
+        
+        // Thread.sleep(100); //choice 2
+        
         tail = (tail + 1) % buffer.length;
+        
+        Thread.sleep(100); //choice 3
+        
         items.release();
     }
 
