@@ -22,11 +22,11 @@ public class BoundedBuffer {
         System.out.println(Thread.currentThread().getName() + " puts " + datum);
         buffer[tail] = datum;
         
-        // Thread.sleep(100); //choice 2
+        Thread.sleep(100); //choice 2
         
         tail = (tail + 1) % buffer.length;
         
-        Thread.sleep(100); //choice 3
+        // Thread.sleep(100); //choice 3
         
         items.release();
     }

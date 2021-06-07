@@ -1,15 +1,9 @@
-package day7.readerswrite;
-
-import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReadWriteLock;
-import java.util.concurrent.locks.ReentrantReadWriteLock;
+package day8.readwrite;
 
 public class Data {
     private final char[] buffer;
-    private final ReadWriteLock rwlock = new ReentrantReadWriteLock(false);
-    private final Lock readlock = rwlock.readLock();
-    private final Lock writelock = rwlock.writeLock();
- 
+    private final ReadWriteLock lock = new RWLock1();
+    
     public Data(int size) {
         this.buffer = new char[size];
         for (int i = 0; i < buffer.length; i++) {
@@ -17,27 +11,26 @@ public class Data {
         }
     }
     public char[] read() throws InterruptedException {
-        readlock.lock();
+        lock.acquireRead();
         try {
             return doRead();
         } finally {
-            readlock.unlock();
+            lock.releaseRead();
         }
     }
     public void write(char c) throws InterruptedException {
-        // writelock.lock();
-        readlock.lock();
+        lock.acquireWrite();
         try {
             doWrite(c);
         } finally {
-            //writelock.unlock();
-        	readlock.unlock();
+            lock.releaseWrite();
         }
     }
     private char[] doRead() {
         char[] newbuf = new char[buffer.length];
         for (int i = 0; i < buffer.length; i++) {
             newbuf[i] = buffer[i];
+            slowly();
         }
         slowly();
         return newbuf;
