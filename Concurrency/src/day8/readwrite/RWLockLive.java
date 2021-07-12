@@ -1,19 +1,21 @@
 package day8.readwrite;
 
-public final class RWLock3 implements ReadWriteLock {
+public final class RWLockLive implements ReadWriteLock {
 	private int readingReaders = 0; 
 	private int writingWriters = 0; 
 	private int waitingWriters = 0;
+	private boolean isReadersTurn = false;
 	
 	public synchronized void acquireRead() throws InterruptedException {
-		while (writingWriters > 0 || waitingWriters > 0) {
+		while (writingWriters > 0 || (waitingWriters > 0 && !isReadersTurn)) {
 			wait();
 		}
-		readingReaders++;              
+		readingReaders++;
 	}
 
 	public synchronized void releaseRead() {
 		readingReaders--;   
+		isReadersTurn = false;
 		notifyAll();
 	}
 
@@ -27,7 +29,8 @@ public final class RWLock3 implements ReadWriteLock {
 	}
 
 	public synchronized void releaseWrite() {
-		writingWriters--;                      
+		writingWriters--;   
+		isReadersTurn = true;
 		notifyAll();
 	}
 }

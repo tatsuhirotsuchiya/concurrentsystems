@@ -25,13 +25,11 @@ public class Data {
         }
     }
     public void write(char c) throws InterruptedException {
-        // writelock.lock();
-        readlock.lock();
+        writelock.lock();
         try {
             doWrite(c);
         } finally {
-            //writelock.unlock();
-        	readlock.unlock();
+            writelock.unlock();
         }
     }
     private char[] doRead() {

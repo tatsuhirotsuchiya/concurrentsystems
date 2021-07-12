@@ -2,7 +2,7 @@ package day8.readwrite;
 
 public class Data {
     private final char[] buffer;
-    private final ReadWriteLock lock = new RWLock1();
+    private final ReadWriteLock lock = new RWLockLive();
     
     public Data(int size) {
         this.buffer = new char[size];
